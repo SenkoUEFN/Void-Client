@@ -55,6 +55,7 @@ wss.on("connection", (socket) =>
         {
             StartGame(msg.mode, "", msg.data.teamNumber)
         }
+
     })
 })
 
@@ -77,7 +78,6 @@ async function StartGame(mode, link, teamNumber)
         {
             joinGame(serverSystem, playerInfo)
         }
-        
     }
     else
     {
@@ -90,4 +90,15 @@ async function StartGame(mode, link, teamNumber)
         joinGame(gameInfo, playerInfo)
     }
 }
+
+function startRendering()
+{
+    socket.send(JSON.stringify(
+        {
+            name : "gameStart"
+        }
+    ))
+}
+
+
 
