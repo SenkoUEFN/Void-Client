@@ -1,5 +1,8 @@
 const WebSockets = require("ws") 
 
+let angle = 0
+let rotateInterval = null
+
 async function joinGame(gameInfo, playerInfo, teamNumber)
 {
     const socket = new WebSockets(
@@ -59,6 +62,7 @@ async function joinGame(gameInfo, playerInfo, teamNumber)
                     name : "respawn"
                 }
             ))
+            
         }
     })
 }

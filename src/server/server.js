@@ -45,21 +45,21 @@ wss.on("connection", (socket) =>
                 ))
                 return
             }
-            StartGame(msg.mode, "")
+            StartGame(msg.mode, "", null, socket)
         }
         else if(msg.name === "customGame")
         {
-            StartGame("", `${msg.link}`)
+            StartGame("", `${msg.link}`, null, socket)
         }
         if(msg.name === "canStart")
         {
-            StartGame(msg.mode, "", msg.data.teamNumber)
+            StartGame(msg.mode, "", msg.data.teamNumber, socket)
         }
 
     })
 })
 
-async function StartGame(mode, link, teamNumber)
+async function StartGame(mode, link, teamNumber, socket)
 {
     console.log(mode)
     if(link === "")
@@ -89,9 +89,10 @@ async function StartGame(mode, link, teamNumber)
         }
         joinGame(gameInfo, playerInfo)
     }
+    startRendering(socket)
 }
 
-function startRendering()
+function startRendering(socket)
 {
     socket.send(JSON.stringify(
         {
